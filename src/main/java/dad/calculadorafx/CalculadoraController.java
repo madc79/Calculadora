@@ -1,5 +1,7 @@
 package dad.calculadorafx;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.io.IOException;
@@ -16,8 +18,16 @@ import javafx.scene.layout.VBox;
 
 public class CalculadoraController implements Initializable {
 
+    //model
+
+    private StringProperty pantalla = new SimpleStringProperty("");
+
+    Calculadora calculadora = new Calculadora();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        resultadoText.textProperty().bindBidirectional(pantalla);
 
     }
 
@@ -74,7 +84,7 @@ public class CalculadoraController implements Initializable {
     private Button ochoButton;
 
     @FXML
-    private VBox pantallaVBox;
+    private VBox root;
 
     @FXML
     private Button puntoButton;
@@ -83,7 +93,7 @@ public class CalculadoraController implements Initializable {
     private TextField resultadoText;
 
     @FXML
-    private HBox resultdoHBox;
+    private HBox resultadoHBox;
 
     @FXML
     private Button seisButton;
@@ -98,94 +108,128 @@ public class CalculadoraController implements Initializable {
     private Button unoButton;
 
     @FXML
-    void onCAction(ActionEvent event) {
-
+    void onCEAction(ActionEvent event) {
+        calculadora.borrar();
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
-    void onCEAction(ActionEvent event) {
-
+    void onCAction(ActionEvent event) {
+        calculadora.borrarTodo();
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onCeroAction(ActionEvent event) {
 
+        calculadora.insertar('0');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onCincoAction(ActionEvent event) {
-
+        calculadora.insertar('5');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onCuatroAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onDividirAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onDosAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onIgualAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onMasAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onMenosAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onMultiplicarAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onNueveAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onOchoAction(ActionEvent event) {
-
+        calculadora.insertar('4');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onPuntoAction(ActionEvent event) {
+        calculadora.insertar('.');
+        pantalla.set(calculadora.getPantalla());
+    }
 
+    @FXML
+    void onDividirAction(ActionEvent event) {
+        calculadora.operar('/');
+        pantalla.set(calculadora.getPantalla());
+    }
+
+    @FXML
+    void onDosAction(ActionEvent event) {
+        calculadora.insertar('2');
+        pantalla.set(calculadora.getPantalla());
+    }
+
+    @FXML
+    void onIgualAction(ActionEvent event) {
+        calculadora.operar('=');
+        pantalla.set(calculadora.getPantalla());
+    }
+
+    @FXML
+    void onMultiplicarAction(ActionEvent event) {
+        calculadora.operar('*');
+        pantalla.set(calculadora.getPantalla());
+    }
+
+    @FXML
+    void onNueveAction(ActionEvent event) {
+        calculadora.insertar('9');
+        pantalla.set(calculadora.getPantalla());
+    }
+
+    @FXML
+    void onOchoAction(ActionEvent event) {
+        calculadora.insertar('8');
+        pantalla.set(calculadora.getPantalla());
+    }
+
+    @FXML
+    void onMenosAction(ActionEvent event) {
+        calculadora.operar('-');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onSeisAction(ActionEvent event) {
-
+        calculadora.insertar('6');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onSieteAction(ActionEvent event) {
+        calculadora.insertar('7');
+        pantalla.set(calculadora.getPantalla());
+    }
 
+    @FXML
+    void onMasAction(ActionEvent event) {
+        calculadora.operar('+');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onTresAction(ActionEvent event) {
-
+        calculadora.insertar('3');
+        pantalla.set(calculadora.getPantalla());
     }
 
     @FXML
     void onUnoAction(ActionEvent event) {
-
+        calculadora.insertar('1');
+        pantalla.set(calculadora.getPantalla());
     }
 
+    public final StringProperty pantallaProperty() {
+        return this.pantalla;
+    }
+
+    public VBox getRoot() {
+        return root;
+    }
+
+    public void setRoot(VBox root) {
+        this.root = root;
+    }
+
+    public void setPantalla(StringProperty pantalla) {
+        this.pantalla = pantalla;
+    }
 
 }
